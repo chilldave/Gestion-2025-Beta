@@ -1,0 +1,18 @@
+<header>List of Members</header>
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each members}}
+        <tr>
+            <td>{{id_persona}}</td>
+            <td>{{nombre}}</td>
+            {{!-- <td>{{email}}</td> --}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
