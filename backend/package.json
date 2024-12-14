@@ -16,7 +16,8 @@
     "express-handlebars": "^8.0.1",
     "gestion-2025-beta": "file:",
     "morgan": "^1.10.0",
-    "mysql2": "^3.11.5"
+    "mysql2": "^3.11.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

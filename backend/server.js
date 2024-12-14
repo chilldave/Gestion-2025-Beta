@@ -5,8 +5,7 @@ import express from 'express';
 import {engine} from 'express-handlebars';
 import path from 'path';
 // import {pool} from './src/utils/db.js';
-import { RouterDashboard } from './src/routes/dashboard.js';
-import {memberRouter} from './src/routes/members.js';
+import { dashboardRouter } from './src/routes/dashboard.js';
 import { fileURLToPath } from 'url';
 import morgan from 'morgan';
 // Definir __dirname
@@ -27,27 +26,7 @@ app.set('views',path.join(__dirname,'src/views'));
 
 
 
-
-app.use('/dashboard',RouterDashboard);
-app.use('/members',memberRouter);
-app.use('/',RouterDashboard);
-
-// app.get('/',async (req,res)=>{
-//     try {
-//         const connection =  await pool.getConnection();
-//         const query = 'SELECT * FROM grupo g JOIN cuota c ON c.id_cuota = g.id_cuota';
-//         const [result] = await connection.query(query); // Realiza la consulta utilizando await
-//         // console.table(result);
-//         res.json(result); // Envía el resultado como respuesta
-//         connection.release();
-//       } catch (err) {
-//         console.error('Error executing query:', err.message);
-//         res.status(500).json({ error: 'Data not found' });
-//       }
-// })
-
-//
-
+app.use('/dashboard',dashboardRouter);
 
 
 // listening Server
