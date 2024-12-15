@@ -4,6 +4,7 @@ import 'dotenv/config';
 import express from 'express';
 import {engine} from 'express-handlebars';
 import path from 'path';
+import cors from 'cors';
 // import {pool} from './src/utils/db.js';
 import { dashboardRouter } from './src/routes/dashboard.js';
 import { fileURLToPath } from 'url';
@@ -15,6 +16,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(morgan('dev'));
+app.use(cors());
  
 //middleware to use json structure
 app.use(express.json());
