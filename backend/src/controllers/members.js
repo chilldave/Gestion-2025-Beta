@@ -22,8 +22,8 @@ export class MemberController{
                 message: 'An error occurred while fetching members',
                 error: err.message, // Avoid exposing sensitive details in production
             });
-        };
-    };
+        }
+    }
     
     // (GET) method to get member by id
     static async getMember (req,res){
@@ -31,7 +31,6 @@ export class MemberController{
         const id = req.params.id;
         try {
             const member = await Member.getMember({id});
-            console.log(member);
             res.status(200).json({
                 timestamp: new Date().toLocaleString(),
                 message: 'User fetched Successfully',
@@ -44,15 +43,14 @@ export class MemberController{
                 error: err.message,
                 timestamp: new Date().toLocaleString(),
             });
-        };
-    };
+        }
+    }
 
 
     // (POST) method to add a new member
     static async setMember (req,res){
 
         const {nombre} = req.body;
-        console.log(req.body);
         
         try {
             const newMember = await Member.setMember({nombre});
@@ -66,7 +64,7 @@ export class MemberController{
                 error: error.message,
             });
         }
-    };
+    }
 
     static async updateMember(req,res){
         const {id} = req.params;
@@ -92,7 +90,7 @@ export class MemberController{
             });
         }
 
-    };
+    }
 
 
 
@@ -115,6 +113,6 @@ export class MemberController{
             });
         }
     }
-};
+}
 
 

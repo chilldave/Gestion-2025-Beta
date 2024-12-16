@@ -1,0 +1,59 @@
+/* Centrar la tabla y darle márgenes redondeados */
+
+.table-container {
+    width: calc(100% - 220px);
+    /* Esto asegura que el contenedor se ajuste al espacio restante, después de restar el tamaño del sidebar */
+    margin-left: 220px;
+    /* Para que la tabla comience desde el borde derecho del sidebar */
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Estilo para la tabla */
+.miembros-table {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100%;
+    /* La tabla ocupará el 100% del ancho disponible en su contenedor */
+    max-width: 100%;
+    /* Asegura que la tabla no se expanda más allá del contenedor */
+    border-collapse: collapse;
+}
+
+.miembros-table th,
+.miembros-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.miembros-table th {
+    background-color: #31a3d4;
+    color: white;
+}
+
+.miembros-table tr.even {
+    background-color: #f2f2f2;
+}
+
+.miembros-table tr.odd {
+    background-color: white;
+}
+
+.miembros-table tr:hover {
+    background-color: #ddd;
+}
+
+/* Quitar bordes */
+.miembros-table,
+.miembros-table th,
+.miembros-table td {
+    border: none;
+}

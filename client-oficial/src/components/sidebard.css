@@ -1,0 +1,45 @@
+.sidebarStyles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-Color: #333;
+    color: white;
+    padding: 20px;
+}
+
+.sidebarStyles ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebarStyles li {
+    font-size: 18px;
+    /* Tamaño más grande de la fuente */
+    margin-bottom: 15px;
+    /* Espaciado entre opciones */
+    padding: 10px 5px;
+    /* Espaciado interno para hacerlas más cómodas de seleccionar */
+    border-radius: 8px;
+    /* Bordes redondeados para las opciones */
+    transition: background-color 0.3s ease;
+    /* Animación para cambios de color */
+}
+
+.sidebarStyles li:hover {
+    background-color: #555;
+    /* Color de fondo cuando pasas el ratón */
+    cursor: pointer;
+    /* Cambia el cursor al pasar por las opciones */
+}
+
+.sidebarStyles li a {
+    text-decoration: none;
+    /* Quita el subrayado de los enlaces */
+    color: white;
+    /* Color del texto */
+    display: block;
+    /* Hace que el enlace ocupe toda el área del li */
+}

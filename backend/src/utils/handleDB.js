@@ -12,7 +12,6 @@ export const handleDatabaseOperation = async (operation) => {
     let connection = null;
     try {
         connection = await pool.getConnection();
-        console.log('Connection from handleDBOperation:',connection);
         return await operation(connection);
     } catch (err) {
         console.log('Database operation error:', err.message);
@@ -21,5 +20,5 @@ export const handleDatabaseOperation = async (operation) => {
     }finally{
         if(connection)
             connection.release();
-    };
+    }
 }

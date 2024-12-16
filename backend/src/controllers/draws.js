@@ -16,8 +16,8 @@ export class DrawsController{
                 message: 'Failed to fetch list',
                 error: err.message,
             });
-        };
-    };
+        }
+    }
 
     // method to get the draw by id
     static async getDraw(req,res){
@@ -27,7 +27,6 @@ export class DrawsController{
                 throw new ValidationError('Invalid ID');
             }
             const draw = await Draws.fetchDrawById({id});
-            console.log(draw);
             res.status(200).json({
                 timestamp: new Date().toLocaleString(),
                 message: 'Draw fetched successfully',
@@ -39,8 +38,8 @@ export class DrawsController{
                 message: 'Failed to fetch draw',
                 error: err.message,
             });
-        };
-    };
+        }
+    }
 
     // method to get the final list of draws
     static async getFinalList(req,res){
@@ -56,7 +55,7 @@ export class DrawsController{
                 message: 'Failed to fetch final list',
                 error: err.message,
             });
-        };
-    };
+        }
+    }
 
-};
+}

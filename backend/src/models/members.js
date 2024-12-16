@@ -13,19 +13,21 @@ export class Member {
                 throw NotFoundError('Data not Found or Database is empty');
             };
             return result;
-        });
-    };
+        })
+    }
 
     //method to get member by id
     static async getMember({id}){
+        const params = [`%${id}%`]
         return await handleDatabaseOperation(async (conn) => {
-            const [result] = await conn.query(membersQuery.getMember,[id]);
+            const [result] = await conn.query(membersQuery.getMember,[params]);
+            console.log(result);
             if(result.length === 0){
                 throw new NotFoundError(`Data not Found or doesn't exist person with ID = ${id}`);
             }
-            return result[0];
-        });
-    };
+            return result;
+        })
+    }
     
     // method to add a new member
     static async createMember({nombre}){
@@ -34,9 +36,9 @@ export class Member {
             return {
                 id: result.insertId,
                 nombre,
-            };
-        });
-    };
+            }
+        })
+    }
 
     // method to update member
     static async updateMember({id,nombre}){
@@ -47,8 +49,8 @@ export class Member {
                 throw new NotFoundError(`No member found with the given ID = ${id}`);
             };
             return { id, nombre};
-        });
-    };
+        })
+    }
 
     // method to delete member 
     static async deleteMember({id}){
@@ -61,7 +63,7 @@ export class Member {
             return {
                 message: 'Member Deleted Successfully',
                 data: id,
-            };
-        });
-    };
+            }
+        })
+    }
 }

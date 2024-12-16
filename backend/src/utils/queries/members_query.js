@@ -11,7 +11,7 @@ export const membersQuery = {
         FROM 
             persona p
         WHERE 
-            p.id_persona = ?
+            p.id_persona LIKE ?
     `,
     createMember:`
         INSERT INTO persona (nombre) 
@@ -29,4 +29,4 @@ export const membersQuery = {
         WHERE 
             id_persona = ?
     `
-}
+};
