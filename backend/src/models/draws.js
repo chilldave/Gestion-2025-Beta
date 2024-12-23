@@ -39,4 +39,14 @@ export class Draws{
             return result;
         })
     }
+
+    static async fetchAvailableDraws(){
+        return await handleDatabaseOperation(async (conn) => {
+            const [result] = await conn.query(drawsQuery.getAvailableDraws);
+            if(result.length === 0){
+                throw new NotFoundError('Data not Found or Database is empty');
+            };
+            return result;
+        })
+    }
 }

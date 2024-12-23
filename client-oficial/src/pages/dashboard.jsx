@@ -1,8 +1,15 @@
-
+import GetFinalList from '../components/getFinalList.jsx';
+// import { useState } from 'react';
+// import Modal from '../components/modal/modalbase.jsx';
+// import Dropbox from '../components/dropbox/dropbox.jsx';
 export const Dashboard = () => {
+
+
     return (
+
         <div>
-            <h1>WELCOME TO MY PAGE</h1>
-        </div>
+
+            <GetFinalList />
+        </div >
     )
 }

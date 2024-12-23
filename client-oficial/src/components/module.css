@@ -1,0 +1,80 @@
+.style-module {
+
+    width: 430px;
+    /* Ancho fijo */
+    height: 250px;
+    /* Alto fijo */
+    display: flex;
+    justify-content: space-between;
+
+    /* Para alinear el contenido del módulo */
+    flex-direction: column;
+    /* Coloca el texto y el botón en columnas */
+    /* justify-content: center; */
+    /* Centra el contenido verticalmente */
+    align-items: center;
+    /* Centra el contenido horizontalmente */
+    border: 2px solid #ccc;
+    /* Borde gris */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    background-color: #f9f9f9;
+    /* Fondo claro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+    padding: 10px;
+    /* Espaciado interno */
+    /* text-align: center; */
+    /* Alinea el texto en el centro */
+    text-align: left;
+
+}
+
+.style-module p {
+    margin: 40px 0;
+    margin-left: 50px;
+    width: 100%;
+    /* margin-left: 50px; */
+    /* Espaciado inferior del texto */
+    font-size: 26px;
+    text-align: left;
+    /* Tamaño de la fuente */
+    font-weight: bold;
+    /* Texto en negrita */
+}
+
+.button-link-module {
+    text-decoration: none;
+    /* Elimina cualquier subrayado */
+    width: 100%;
+}
+
+.style-module button {
+    margin-bottom: auto;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* Empuja el botón hacia el fondo */
+    width: 100%;
+    /* El botón ocupa todo el ancho disponible */
+    padding: 15px;
+    /* Tamaño del botón más grande */
+    font-size: 18px;
+    /* Texto del botón más grande */
+    border: none;
+    /* Sin bordes */
+    border-radius: 6px;
+    /* Bordes redondeados */
+    background-color: #007bff;
+    /* Color azul */
+    color: white;
+    /* Texto blanco */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease;
+    /* Transición suave */
+}
+
+.style-module button:hover {
+    background-color: #51dbb4;
+    color: white;
+}

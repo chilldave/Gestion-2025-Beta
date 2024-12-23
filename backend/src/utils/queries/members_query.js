@@ -1,4 +1,11 @@
 export const membersQuery = {
+    findByNameDB:`
+        SELECT 
+            * 
+        FROM 
+            persona p
+        WHERE p.nombre = ?
+    `,
     getMembers: `
         SELECT 
             * 
@@ -28,5 +35,25 @@ export const membersQuery = {
         DELETE FROM persona 
         WHERE 
             id_persona = ?
+    `,
+    updateDate:
     `
+        UPDATE 
+            grupo
+        SET
+            id_persona = ?,
+            estado = 1
+        WHERE
+            id_grupo = ?
+    `,
+    updateGroupBeforeDelete:
+    `
+        UPDATE 
+            grupo
+        SET
+            id_persona = NULL,
+            estado = 0
+        WHERE
+            id_persona = ?
+    `,
 };

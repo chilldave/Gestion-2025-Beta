@@ -49,15 +49,30 @@ export class MemberController{
 
     // (POST) method to add a new member
     static async setMember (req,res){
-
-        const {nombre} = req.body;
-        
+        // console.log('This is the body: ',req.body);
+        const {nombre,id_date} = req.body;
+        // console.log('This is the id: ',id_date);
+        const newNombre = nombre.trim();   
+        console.log(newNombre);
         try {
-            const newMember = await Member.setMember({nombre});
+
+            const newMember = await Member.createMember({nombre:newNombre});
+            
+
+            if(id_date){
+                const member = await Member.updateDate({userId: newMember.id, id_date:id_date}); 
+
+                res.status(200).json({
+                    message: 'Asigned created successfully',
+                    member: member,
+                });
+
+            }else{
+
             res.status(200).json({
                 message: 'Member created successfully',
                 member: newMember,
-            });
+            });}
         } catch (error) {
             res.status(500).json({
                 message: 'Failed to create member',

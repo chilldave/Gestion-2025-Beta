@@ -57,3 +57,28 @@ h1 {
 .miembros-table td {
     border: none;
 }
+
+
+.block-SearchBard {
+    margin-Bottom: 20px;
+    display: flex;
+    justify-Content: flex-end;
+    align-Items: center;
+    justify-content: space-between;
+}
+
+.search-bar {
+    padding: 8px;
+    margin-Right: 10px;
+    border-Radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.block-SearchBard button {
+    padding: 10px 20px;
+    background-color: #4bd108;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -28,12 +28,15 @@ export const drawsQuery = {
     getDrawFinalList:`
         SELECT 
 	        g.id_grupo, p.nombre, 
-            g.fecha_rifa, 
+            DATE_FORMAT(g.fecha_rifa, '%d-%m-%Y') AS fecha_rifa, 
 	        YEAR(g.fecha_rifa) AS anho,
-            g.estado 
+            CASE 
+				WHEN  g.estado = 0 THEN 'Pendiente'
+                WHEN g.estado = 1 THEN 'Asignado'
+			END AS estado
         FROM 
 	        grupo g
-        RIGHT JOIN 
+        LEFT JOIN 
 	        persona p ON g.id_persona = p.id_persona
         WHERE 
             g.fecha_rifa IS NOT NULL
@@ -42,4 +45,14 @@ export const drawsQuery = {
         ORDER BY
 	        g.fecha_rifa ASC;
     `,  
+    getAvailableDraws:
+    `
+        SELECT
+            id_grupo AS Id,
+	        CONCAT (g.nombre , ' -  ', g.fecha_rifa) AS Disponibles 
+        FROM 
+	        grupo g
+        WHERE 
+	        g.estado = 0;
+    `
 };

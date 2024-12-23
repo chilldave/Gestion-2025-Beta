@@ -1,0 +1,45 @@
+.btn-edit {
+    padding: 10px 20px;
+    background-color: #36b3d2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    width: 50%;
+
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btn-edit:hover {
+    background-color: #0f56b4;
+}
+
+.btn-edit:active {
+    background-color: #0c66c0;
+}
+
+.btn-delete {
+    padding: 10px 20px;
+    background-color: #eb3030;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
+    /* Centra el botón horizontalmente */
+    cursor: pointer;
+    width: 50%;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btn-delete:hover {
+    background-color: #d71a1a;
+}
+
+.btn-delete:active {
+    background-color: #d54603;
+}

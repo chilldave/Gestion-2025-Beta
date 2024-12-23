@@ -1,0 +1,20 @@
+.container-module {
+
+    display: flex;
+    /* Activa flexbox */
+    flex-wrap: wrap;
+    /* Permite que los elementos pasen a la siguiente fila si no caben */
+    gap: 16px;
+    /* Espaciado entre los módulos */
+    justify-content: flex-start;
+    /* Alinea los módulos al inicio */
+    padding: 16px;
+    /* Espaciado interno del contenedor */
+}
+
+
+.container-own-moduleroute h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}

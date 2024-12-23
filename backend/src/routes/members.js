@@ -9,7 +9,7 @@ memberRouter.get('/',MemberController.getAllMember);
 
 memberRouter.get('/:id',validateGetMember(validateMember),MemberController.getMember);
 
-memberRouter.post('/',MemberController.setMember);
+memberRouter.post('/create-member',MemberController.setMember);
 
 memberRouter.delete('/:id',MemberController.deleteMember);
 

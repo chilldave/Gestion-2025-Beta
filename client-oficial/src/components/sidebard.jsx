@@ -12,7 +12,7 @@ export const Sidebar = () => {
                         <Link to="/dashboard">Inicio</Link>
                     </li>
                     <li>
-                        <Link to="/dashboard/members">Miembros</Link>
+                        <Link to="/dashboard/members/options">Miembros</Link>
                     </li>
                     {/* Aquí puedes agregar más enlaces */}
                 </ul>

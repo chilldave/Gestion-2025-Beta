@@ -74,54 +74,18 @@ const Members = () => {
         }
     }
 
-    // const handleSearch = async (e) => {
-    //     const inputValue = e.target.value;
-    //     console.log(inputValue);
-    //     setSearchId(inputValue); // Actualizar el estado del input
 
-    //     if (inputValue.trim() === "") {
-    //         setFilteredData(data); // Mostrar todos los datos si el campo está vacío
-    //         setError(null); // Limpiar errores
-    //         return;
-    //     }
-
-    //     try {
-    //         const response = await fetch(`http://localhost:8000/dashboard/members/${inputValue}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error! status: ${response.status}`);
-    //         }
-
-    //         const result = await response.json();
-    //         setFilteredData([result.data]); // Mostrar solo el resultado encontrado
-    //         setError(null); // Limpiar errores
-    //     } catch (err) {
-    //         setFilteredData([]); // Limpiar resultados si no hay coincidencias
-    //         setError(`No se encontró un miembro con ID ${inputValue}`);
-    //         console.error("Error fetching member by ID:", err);
-    //     }
-    // };
     return (
         <div>
-            <h1>API Data Fetch</h1>
+            <h1>Integrantes Cuchubal 2025-2026</h1>
 
-            <div style={{ marginBottom: "20px" }}>
+            <div className="block-SearchBard">
                 <input
                     type="text"
                     placeholder="Buscar por ID"
                     value={searchId}
                     onChange={handleSearch} // Llamar a la función cada vez que cambie el texto
-                    style={{
-                        padding: "8px",
-                        marginRight: "10px",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                    }}
+                    className="search-bar"
                 />
             </div>
 
@@ -142,7 +106,7 @@ const Members = () => {
                     ) : filteredData.length > 0 ? (
                         filteredData.map((user, index) => (
                             <tr key={user.id_persona} className={index % 2 === 0 ? "even" : "odd"}>
-                                <td>{user.id_persona}</td>
+                                <td>{index + 1}</td>
                                 <td>{user.nombre}</td>
                             </tr>
                         ))

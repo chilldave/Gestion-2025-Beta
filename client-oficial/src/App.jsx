@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Sidebar } from './components/sidebard';
 import Members from './pages/members';
+import EditMember from './pages/editMember';
+import MemberRoute from './pages/member_route';
 import { Dashboard } from './pages/dashboard';
 
 const App = () => {
@@ -14,7 +16,9 @@ const App = () => {
         <div style={contentStyles}>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/members" element={<Members />} />
+            <Route path="/dashboard/members/options" element={<MemberRoute />} />
+            <Route path="/dashboard/members/option/list-members" element={<Members />} />
+            <Route path="/dashboard/members/option/manage-members" element={<EditMember />} />
             {/* <Route path="/page2" element={<Page2 />} /> */}
           </Routes>
         </div>

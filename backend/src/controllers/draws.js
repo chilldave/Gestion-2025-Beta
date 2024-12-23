@@ -58,4 +58,19 @@ export class DrawsController{
         }
     }
 
+    static async getAvailableDraws(req,res){
+        try {
+            const list = await Draws.fetchAvailableDraws();
+            res.status(200).json({
+                timestamp: new Date().toLocaleString(),
+                message: 'Available draws fetched successfully',
+                data: list,
+            })
+        } catch (err) {
+            res.status(500).json({
+                message: 'Failed to fetch available draws',
+                error: err.message,
+            });
+        }
+    }
 }
