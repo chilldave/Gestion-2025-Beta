@@ -17,7 +17,7 @@ const GetFinalList = () => {
     useEffect(() => {
         const fetchDataList = async () => {
             try {
-                const response = await fetch("http://localhost:8000/dashboard/draws/final", {
+                const response = await fetch("http://localhost:8000/api/draws/final", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const GetFinalList = () => {
                                     <td>{info.nombre}</td>
                                     <td>{info.fecha_rifa}</td>
                                     <td>{info.anho}</td>
-                                    <td>{info.estado}</td>
+                                    <td style={{ color: info.estado === 'Asignado' ? '#EBC58D' : '#8054EB' }}>{info.estado}</td>
                                 </tr>
                             ))
                         ) : (

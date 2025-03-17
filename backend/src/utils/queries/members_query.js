@@ -1,6 +1,6 @@
 export const membersQuery = {
     findByNameDB:`
-        SELECT 
+        SELECT   
             * 
         FROM 
             persona p
@@ -8,9 +8,15 @@ export const membersQuery = {
     `,
     getMembers: `
         SELECT 
-            * 
-        FROM
-            persona p   
+            p.id_persona, p.nombre, sum(c.monto) AS Monto 
+        FROM 
+            gestion_beta.persona p
+        INNER JOIN 
+            gestion_beta.grupo g ON p.id_persona = g.id_persona
+        LEFT JOIN 
+            gestion_beta.cuota c  ON g.id_cuota = c.id_cuota
+        GROUP BY 
+            p.id_persona,p.nombre   
     `,
     getMember:`
         SELECT 

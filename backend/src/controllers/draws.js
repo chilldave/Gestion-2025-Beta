@@ -3,7 +3,7 @@ import { ValidationError } from '../utils/errors.js';
 
 export class DrawsController{
     // method to list all draws with total of participants and count of draws
-    static async getList (req, res){
+    static async getDrawsList (req, res){
         try{
             const list = await Draws.fetchAllDraws();
             res.status(200).json({
@@ -11,8 +11,11 @@ export class DrawsController{
                 message: 'List fetched successfully',
                 data: list,
             });
-        }catch(err){
+        }catch(err){    
+            // console.log(err);
+        
             res.status(500).json({
+                timestamp: new Date().toLocaleString(),
                 message: 'Failed to fetch list',
                 error: err.message,
             });

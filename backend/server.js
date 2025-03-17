@@ -1,10 +1,9 @@
 
 import 'dotenv/config';
-// const express  = require('express');
 import express from 'express';
-import {engine} from 'express-handlebars';
 import path from 'path';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 // import {pool} from './src/utils/db.js';
 import { dashboardRouter } from './src/routes/dashboard.js';
 import { fileURLToPath } from 'url';
@@ -19,16 +18,26 @@ app.use(morgan('dev'));
 app.use(cors());
  
 //middleware to use json structure
-app.use(express.json());
+app.use(bodyParser.json());
 
-app.engine('hbs',engine({extname:'.hbs',
-  partialsDi: path.join(__dirname,'src/views/partials')}));
-app.set('view engine','hbs');
-app.set('views',path.join(__dirname,'src/views'));
+app.use('/api',dashboardRouter);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        success: false,
+        message: 'An unexpected error occurred',
+    });
+});
+// app.use((req, res) => {
+//     res.status(404).json({
+//         success: false,
+//         message: `Ruta ${req.originalUrl} no encontrada`,
+//     });
+// });
 
 
 
-app.use('/dashboard',dashboardRouter);
 
 
 // listening Server

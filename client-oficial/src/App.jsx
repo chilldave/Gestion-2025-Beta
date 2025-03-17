@@ -4,6 +4,7 @@ import Members from './pages/members';
 import EditMember from './pages/editMember';
 import MemberRoute from './pages/member_route';
 import { Dashboard } from './pages/dashboard';
+import Payments from './pages/payments';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/dashboard/members/options" element={<MemberRoute />} />
             <Route path="/dashboard/members/option/list-members" element={<Members />} />
             <Route path="/dashboard/members/option/manage-members" element={<EditMember />} />
+            <Route path="/dashboard/members/option/bitacora-pagos" element={<Payments/>} />
             {/* <Route path="/page2" element={<Page2 />} /> */}
           </Routes>
         </div>

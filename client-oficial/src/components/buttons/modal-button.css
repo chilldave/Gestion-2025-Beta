@@ -1,0 +1,7 @@
+.button-container {
+    display: inline-block;
+    margin: 10px;
+    position: relative; /* Necesario para el posicionamiento absoluto */
+
+  }
+

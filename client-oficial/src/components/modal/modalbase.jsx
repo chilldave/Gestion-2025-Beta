@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const Modal = ({ children, isOpen, onClose, className = "" }) => {
-    if (!isOpen) return null;
+    if(!isOpen) return null;
 
     return (
         <div className="modal-overlay">
@@ -20,7 +20,8 @@ const Modal = ({ children, isOpen, onClose, className = "" }) => {
 
 
 Modal.propTypes = {
-    children: PropTypes.node.isRequired,
+      children: PropTypes.node, // Cambiado de .isRequired a simplemente .node
+
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     className: PropTypes.string,

@@ -3,7 +3,7 @@ import {DrawsController} from '../controllers/draws.js';
 
 export const drawsRouter = Router();
 
-drawsRouter.get('',DrawsController.getList);
+drawsRouter.get('/getDraws',DrawsController.getDrawsList);
 
 drawsRouter.get('/draws/:id',DrawsController.getDraw);
 

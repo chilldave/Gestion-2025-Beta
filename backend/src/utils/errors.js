@@ -2,7 +2,7 @@
 export class DatabaseError extends Error{
     constructor(message){
         super(message);
-        this.name = 'DatabaseError: ';
+        this.name = 'DatabaseError';
     }
 }
 
@@ -16,6 +16,6 @@ export class ValidationError extends Error {
 export class NotFoundError extends Error {
     constructor(message) {
         super(message);
-        this.name = 'NotFoundError';
+        this.name = 'NotFoundError';    
     }
 }

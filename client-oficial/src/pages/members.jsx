@@ -12,7 +12,7 @@ const Members = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://localhost:8000/dashboard/members", {
+                const response = await fetch("http://localhost:8000/api/members", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -94,6 +94,8 @@ const Members = () => {
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Monto</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -104,12 +106,23 @@ const Members = () => {
                             </td>
                         </tr>
                     ) : filteredData.length > 0 ? (
-                        filteredData.map((user, index) => (
+                        <>
+                        {filteredData.map((user, index) => (
                             <tr key={user.id_persona} className={index % 2 === 0 ? "even" : "odd"}>
                                 <td>{index + 1}</td>
                                 <td>{user.nombre}</td>
+                                <td>{user.Monto}</td>
                             </tr>
-                        ))
+                        ))}
+                        {
+                            <tr>
+                            <td colSpan="2">TOTAL</td>
+                            <td>
+                            {filteredData.reduce((acc, user) => acc + (parseFloat(user.Monto) || 0), 0)}
+                            </td>
+                          </tr>
+                        }
+                        </>
                     ) : (
                         <tr>
                             <td colSpan="2" style={{ textAlign: "center" }}>
@@ -123,8 +136,6 @@ const Members = () => {
     );
 };
 
-
-// import React, { useState } from "react";
 
 
 

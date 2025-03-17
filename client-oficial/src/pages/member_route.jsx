@@ -8,7 +8,7 @@ const MemberRoute = () => {
     const moduleNames = [
         { name: "Administrar Integrantes", path: "/dashboard/members/option/manage-members" },
         { name: "Listado de Integrantes", path: "/dashboard/members/option/list-members" },
-        { name: "Módulo 3", path: "module3" },
+        { name: "Bitacora de Pagos", path: "/dashboard/members/option/bitacora-pagos" },
         { name: "Módulo 4", path: "module4" },
         { name: "Módulo 5", path: "module5" }];
     return (

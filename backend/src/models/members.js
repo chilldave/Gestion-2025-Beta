@@ -2,6 +2,7 @@ import { pool } from "../utils/handleDB.js";
 import { membersQuery } from "../utils/queries/members_query.js";
 import { handleDatabaseOperation } from "../utils/handleDB.js";
 import { NotFoundError } from "../utils/errors.js";
+import { param } from "express-validator";
 export class Member {
 
     // method to get all members from the persona table
@@ -9,38 +10,43 @@ export class Member {
         return await handleDatabaseOperation( async (conn) => {
             
             const [result] = await conn.query(membersQuery.getMembers);
-            if(result.length === 0 ){
-                throw NotFoundError('Data not Found or Database is empty');
-            };
-            console.log(result);
+                if(result.length === 0 ){
+                    throw new  NotFoundError('Members not Found');
+                };
             return result;
         })
     }
 
     //method to get member by id
     static async getMember({id}){
-        const params = [`%${id}%`]
-     
+
+        const params = [`%${id}%`]    
         return await handleDatabaseOperation(async (conn) => {
             const [result] = await conn.query(membersQuery.getMember,[params]);
-            // console.log(result);
             if(result.length === 0){
-                throw new NotFoundError(`Data not Found or doesn't exist person with ID = ${id}`);
+                throw new NotFoundError(`Member not Found or Doesn't exist`);
             }
             return result;
         })
     }
     
+    static async getMemberByName({name}){
+
+        const params = [`${name}`]    
+        console.log('paramas: ', params)
+        return await handleDatabaseOperation(async (conn) => {
+            const [result] = await conn.query(membersQuery.findByNameDB,[params]);
+            return result;
+        })
+    }
     // method to add a new member
     static async createMember({nombre}){
-
         return await handleDatabaseOperation(async (conn) => {
             const [existingMember] = await conn.query(membersQuery.findByNameDB, [nombre]);
         if (existingMember.length > 0) {
-            throw new NotFoundError(`Member Already Exists with the name = ${nombre}`);
+            throw new NotFoundError(`Member Already Exists`);
         }
             const [result] = await conn.query(membersQuery.createMember,[nombre]);
-
             return {
                 id: result.insertId,
                 nombre,
@@ -48,43 +54,51 @@ export class Member {
         })
     }
 
-    // method to update date 
-    static async updateDate({userId, id_date}){ 
-            return await handleDatabaseOperation(async (conn) => {
-                const [result] = await conn.query(membersQuery.updateDate,[userId,id_date]);
-                if(result.affectedRows === 0){
-                    throw new NotFoundError(`No member found with the given ID = ${userId}`);
-                };
-                return { userId, id_date};
-        })
-    }
 
     // method to update member
     static async updateMember({id,nombre}){
 
         return await handleDatabaseOperation(async (conn) => {
+            
+            const validResult= await this.getMemberByName({name: nombre});
+            if (validResult.length > 0) {
+                throw new NotFoundError(`There is already a person with the same name`);
+            }
+
             const [result] = await conn.query(membersQuery.updateMember,[nombre,id]);
             if(result.affectedRows === 0){
-                throw new NotFoundError(`No member found with the given ID = ${id}`);
-            };
+                throw new NotFoundError(`No member found`);
+            };            
             return { id, nombre};
         })
     }
 
     // method to delete member 
     static async deleteMember({id}){
-
+        console.log(id)
         return await handleDatabaseOperation(async (conn) => {  
-            const [updateBeforeDelete] = await conn.query(membersQuery.updateGroupBeforeDelete,[id]);
-            const [result] = await conn.query(membersQuery.deleteMember,[id]);
 
-            if(result.affectedRows === 0){
-                throw new NotFoundError(`No member found with the given ID = ${id}`);
-            };
-            return {
-                message: 'Member Deleted Successfully',
-                data: id,
-            }
-        })
+            // Intentar realizar la actualización antes de la eliminación
+    const [updateBeforeDelete] = await conn.query(membersQuery.updateGroupBeforeDelete, [id]);
+
+    // Aquí verificamos si no se afectaron filas, y si es así, podemos continuar
+    if (updateBeforeDelete.affectedRows === 0) {
+        console.log("No records updated before delete, but continuing with deletion...");
     }
-}
+
+    // Procedemos con la eliminación del miembro
+    const [result] = await conn.query(membersQuery.deleteMember, [id]);
+
+
+    // Si no se eliminó nada, lanzamos un error de "No encontrado"
+    if (result.affectedRows === 0) {
+        throw new NotFoundError(`No member found with id: ${id}`);
+    }
+
+    // Si todo fue bien, devolvemos el mensaje de éxito
+    return {
+        message: 'Member Deleted Successfully',
+        data: id,
+    };
+})
+}}

@@ -1,0 +1,33 @@
+.button-approved{
+    width: 40vw;                             
+    padding: 15px;                                             
+    background-color: #29820a;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);  /* Escala el checkbox */
+    margin: 1px;           /* Agrega espacio alrededor */
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: #4caf50;  /* Color de fondo cuando está marcado */
+  }
+  
+  input[type="checkbox"]:focus {
+    outline: none;  /* Elimina el contorno al hacer focus */
+  }
+
+input[type="date"]{
+    margin: 10px;
+    padding: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 20vw;
+    text-align: center;
+    font-size: medium;
+}
