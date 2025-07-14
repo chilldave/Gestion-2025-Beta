@@ -35,10 +35,10 @@ const Payments = () => {
             }
 
             const result = await response.json();
-            console.log('result',result)
+            console.log('result', result)
             if (result) {
                 console.log("Pagos actualizados correctamente", result);
-                setInitialData(payments);   
+                setInitialData(payments);
             } else {
                 console.error("Respuesta inesperada del servidor", result);
             }
@@ -55,11 +55,11 @@ const Payments = () => {
                     "Content-Type": "application/json",
                 },
             });
-
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const result = await response.json();
+            console.log("This is from FetchData Methodo Get : ", result);
 
             setData(result.data);
 
@@ -68,7 +68,7 @@ const Payments = () => {
                 return acc;
             }, {});
             setCheckboxState(initialCheckboxState);
-            
+
             // console.log('First useEffect: ',initialCheckboxState);
         } catch (err) {
             setError(err.message);
@@ -86,17 +86,17 @@ const Payments = () => {
     useEffect(() => {
         // console.log('This is from sec UseEffect1: ',data)
         // console.log('This is from sec UseEffect2 :',checkboxState);
-    if (data) {
-        const finalInformacion = data
-            .map(({ Id, IdGp }) => ({ id: Id, rifa: IdGp }))
-            .map(data => ({
-                ...data,
-                status: checkboxState[data.id] !== undefined ? checkboxState[data.id] : undefined
-            }));
-        // console.log(finalInformacion)
+        if (data) {
+            const finalInformacion = data
+                .map(({ Id, IdGp }) => ({ id: Id, rifa: IdGp }))
+                .map(data => ({
+                    ...data,
+                    status: checkboxState[data.id] !== undefined ? checkboxState[data.id] : undefined
+                }));
+            // console.log(finalInformacion)
             setInitialData(finalInformacion);
-    }
-}, [data]);
+        }
+    }, [data]);
 
     // useEffect(()=>{
 
@@ -125,17 +125,17 @@ const Payments = () => {
             ...prevState,
             [id]: !prevState[id], // Cambia el estado del checkbock
         }));
-        
+
     };
 
 
     const handleChanges = () => {
-        console.log('Infor: ',initialData);
-        console.log('Info initualdata in HandleChnages' , checkboxState);
+        console.log('Infor: ', initialData);
+        console.log('Info initualdata in HandleChnages', checkboxState);
         const hasChanges = initialData.some((item) => {
             console.log('estatus        CheckboxStatus');
-            console.log(item.status,checkboxState[item.id] )
-            
+            console.log(item.status, checkboxState[item.id])
+
             const status = item.status !== checkboxState[item.id];
             return status;
         });
@@ -156,24 +156,37 @@ const Payments = () => {
         const finalyData = initialData;
         console.log(finalyData);
         const finalInformacion = finalyData
-    .map(data => ({
-        ...data,
-        id: data.id.toString(),  // Convertimos el id a cadena
-        rifa: data.rifa.toString(),  // Convertimos rifa a cadena
-        status: checkboxState[data.id] !== undefined 
-            ? checkboxState[data.id]   // Si es true, asigna 1, si es false, asigna 0
-            : undefined
-    }));
+            .map(data => ({
+                ...data,
+                id: data.id.toString(),  // Convertimos el id a cadena
+                rifa: data.rifa.toString(),  // Convertimos rifa a cadena
+                status: checkboxState[data.id] !== undefined
+                    ? checkboxState[data.id]   // Si es true, asigna 1, si es false, asigna 0
+                    : undefined
+            }));
 
         console.log(finalInformacion);
         // console.log(finalInformacion)
-            // setInitialData(finalInformacion);
-            try {
-                await updatePayment(finalInformacion);
-            } catch (err) {
-                console.error('Error al actualizar los pagos:', err);
-            }
+        // setInitialData(finalInformacion);
+        try {
+            await updatePayment(finalInformacion);
+        } catch (err) {
+            console.error('Error al actualizar los pagos:', err);
+        }
     }
+
+    let totalCancelados = data.reduce((acc, p) => {
+        return p.Cancelado === "Si" ? acc + Number(p.Monto) : acc;
+    }, 0);
+
+    let totalNoCancelados = data.reduce((acc, p) => {
+        return p.Cancelado === "No" ? acc + Number(p.Monto) : acc;
+    }, 0);
+    let totalPagos = data.reduce((acc, p) => acc + Number(p.Monto), 0);
+    const formatCurrency = (value) =>
+        new Intl.NumberFormat('es-DO', { style: 'currency', currency: 'DOP' }).format(value);
+
+
     return (
         <div>
             <h1>REGISTRO DE PAGOS</h1>
@@ -213,6 +226,7 @@ const Payments = () => {
                                     />
                                 </td>
                             </tr>
+
                         ))
                     ) : (
                         <tr>
@@ -220,6 +234,26 @@ const Payments = () => {
                         </tr>
                     )}
                 </tbody>
+            </table>
+            <br />
+
+            <table className='style-table'>
+                <thead>
+                    <tr>
+                        <th>Monto Total</th>
+                        <th>Acumulado</th>
+                        <th>Pendiente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{totalPagos}</td>
+                        <td>{totalCancelados}</td>
+                        <td>{totalNoCancelados}</td>
+                    </tr>
+
+                </tbody>
+
             </table>
         </div>
     );
